@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Piyal Basak - Performance Marketer & Problem Solver">
+    <meta name="theme-color" content="#0f172a">
+    <title>Piyal Basak | Growth Partner & Digital Marketing Expert</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="tailwind.config.js"></script>
+
+    <style>
+        /* Base & Scrollbar */
+        html, body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: #0b0f19;
+            color: #f8fafc;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #3A86FF, #00D4FF);
+            border-radius: 5px;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(58, 134, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(58, 134, 255, 0.1);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        .glass-input:focus {
+            outline: none;
+            border-color: #00D4FF;
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+        }
+
+        /* Text Gradients */
+        .text-gradient {
+            background: linear-gradient(135deg, #3A86FF 0%, #00D4FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .text-gradient-alt {
+            background: linear-gradient(135deg, #00D4FF 0%, #6C63FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Background Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+        }
+        .orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #3A86FF; }
+        .orb-2 { bottom: 10%; right: -10%; width: 40vw; height: 40vw; background: #6C63FF; }
+        .orb-3 { top: 40%; left: 30%; width: 30vw; height: 30vw; background: #00D4FF; opacity: 0.2; }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 100ms; }
+        .reveal-delay-2 { transition-delay: 200ms; }
+        .reveal-delay-3 { transition-delay: 300ms; }
+
+        /* Typing cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: #00D4FF;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Button Ripple & Hover */
+        .btn-premium {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #3A86FF, #6C63FF);
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #00D4FF, #3A86FF);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        .btn-premium:hover::before { left: 0; }
+        .btn-premium:hover {
+            box-shadow: 0 0 20px rgba(58,134,255,0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #3A86FF;
+            transition: all 0.3s ease;
+        }
+        .btn-outline:hover {
+            background: rgba(58,134,255,0.1);
+            border-color: #00D4FF;
+            box-shadow: 0 0 15px rgba(0,212,255,0.3);
+        }
+
+        /* Portfolio Auto Scroll Effect */
+        .portfolio-scroll-img {
+            background-color: #0f172a;
+            background-size: cover; 
+            background-position: top center;
+            background-repeat: no-repeat;
+            animation: imageAutoScroll 10s linear infinite alternate;
+        }
+        
+        /* Pause scroll on hover */
+        .portfolio-card:hover .portfolio-scroll-img {
+            animation-play-state: paused;
+        }
+
+        @keyframes imageAutoScroll {
+            0%, 5% { background-position: top center; }
+            95%, 100% { background-position: bottom center; }
+        }
+
+        /* SPECIFIC FIX FOR MOBILE TO LOOK LIKE PC */
+        @media (max-width: 768px) {
+            .portfolio-scroll-img {
+                 background-size: cover; 
+                 background-attachment: scroll;
+            }
+            .portfolio-card .h-\[300px\] {
+                height: 250px; 
+            }
+        }
+        
+        /* Page Loader */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #0b0f19; z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        .spinner {
+            width: 60px; height: 60px;
+            border: 5px solid rgba(58,134,255,0.2);
+            border-top-color: #00D4FF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Toast Modal */
+        #toast {
+            position: fixed; bottom: 30px; right: 30px; z-index: 10000;
+            transform: translateX(150%); transition: transform 0.4s ease;
+        }
+        #toast.show { transform: translateX(0); }
+    </style>
+</head>
+<body class="relative antialiased text-gray-200">
+
+    <!-- Loader -->
+    <div id="loader">
+        <div class="flex flex-col items-center">
+            <div class="spinner mb-4"></div>
+            <div class="text-gradient font-bold text-xl tracking-wider uppercase">Loading...</div>
+        </div>
+    </div>
+
+    <!-- Background Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Custom Toast Message -->
+    <div id="toast" class="glass-panel p-4 rounded-xl flex items-center gap-3 border-l-4 border-green-500 shadow-lg">
+        <i class="fas fa-check-circle text-green-500 text-xl" id="toast-icon"></i>
+        <span id="toast-message" class="text-sm font-medium">Message sent successfully!</span>
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12 flex justify-between items-center">
+            <a href="#" class="text-xl md:text-2xl font-bold tracking-tighter flex items-center gap-2 group">
+                <span id="nav-logo-text" class="text-white group-hover:text-gradient transition-colors">Piyal Basak</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8" id="desktop-menu">
+                <!-- Injected via JS -->
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-2xl focus:outline-none text-white z-[110]">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-screen bg-[#0b0f19] transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center space-y-6 text-xl" style="background-color: #0b0f19; z-index: 100000;">
+        <button id="close-menu-btn" class="absolute top-6 right-6 text-3xl text-gray-400 hover:text-white focus:outline-none">
+            <i class="fas fa-times"></i>
+        </button>
+        <div id="mobile-menu-links" class="flex flex-col items-center space-y-6 z-10 w-full">
+            <!-- Injected via JS -->
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-24 pb-36 md:pt-32 md:pb-32 flex flex-col items-center justify-center overflow-hidden min-h-screen">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 grid md:grid-cols-2 gap-12 items-center w-full">
+            <!-- Hero Content -->
+            <div class="text-center md:text-left reveal mt-8 md:mt-0">
+                <div class="inline-block px-4 py-1.5 rounded-full glass-card text-sm text-accent mb-6 border border-accent/30 font-medium">
+                    <i class="fas fa-rocket mr-2"></i> <span id="hero-badge">Welcome to my portfolio</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4">
+                    <span class="block text-gray-300 text-3xl md:text-4xl mb-2" id="hero-greeting">Hello, I'm</span>
+                    <span id="hero-name" class="text-gradient">Name Here</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-300 h-10 flex items-center justify-center md:justify-start">
+                    <span class="mr-2">I fix your</span> <span id="hero-typing" class="text-gradient-alt typing-cursor font-bold"></span>
+                </h2>
+                
+                <!-- Mobile Hero Image -->
+                <div class="md:hidden relative flex justify-center items-center my-10 reveal reveal-delay-1">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-accent/20 rounded-full blur-3xl animate-pulse"></div>
+                    <div class="relative w-64 h-64 rounded-full p-2 glass-panel animate-float">
+
+                        <img src="" alt="Profile" class="hero-profile-image w-full h-full rounded-full object-cover border-4 border-transparent bg-clip-border" style="background-image: linear-gradient(#0b0f19, #0b0f19), linear-gradient(135deg, #3A86FF, #00D4FF); background-origin: border-box; background-clip: content-box, border-box;">
+                        
+                        <!-- Floating Badge (Mobile) -->
+                        <div class="absolute -bottom-3 right-0 md:-right-2 glass-panel px-3 py-1.5 rounded-lg border border-accent/40 text-xs font-bold text-white shadow-xl flex items-center gap-1.5 z-20 animate-float-delayed">
+                            <i class="fas fa-bullseye text-[#3A86FF]"></i> Digital Marketing Specialist
+                        </div>
+
+                    </div>
+                </div>
+
+                <p id="hero-description" class="text-gray-400 text-lg mb-8 max-w-xl leading-relaxed text-justify md:text-left mx-auto md:mx-0">
+                    Description goes here.
+                </p>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start mb-8" id="hero-buttons">
+                    <!-- Buttons injected via JS -->
+                </div>
+                
+                <!-- Socials -->
+                <div class="flex flex-col items-center md:items-start gap-8 mt-4 pb-8 md:pb-0">
+                    <div class="flex gap-4 justify-center md:justify-start" id="hero-socials">
+                        <!-- Socials injected via JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hero Image (Desktop) -->
+            <div class="hidden md:flex relative justify-end items-center reveal reveal-delay-2 w-full">
+                <div class="relative flex justify-center items-center mr-4 lg:mr-0">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-accent/20 rounded-full blur-3xl animate-pulse"></div>
+                    <div class="relative w-80 h-80 lg:w-[420px] lg:h-[420px] rounded-full p-2 glass-panel animate-float">
+
+                        <img src="" alt="Profile" class="hero-profile-image w-full h-full rounded-full object-cover border-4 border-transparent bg-clip-border" style="background-image: linear-gradient(#0b0f19, #0b0f19), linear-gradient(135deg, #3A86FF, #00D4FF); background-origin: border-box; background-clip: content-box, border-box;">
+                        
+                        <!-- Floating Badge (Desktop) -->
+                        <div class="absolute bottom-12 -right-6 lg:-right-10 glass-panel px-4 py-2 rounded-xl border border-accent/40 text-sm font-bold text-white shadow-2xl flex items-center gap-2 z-20 animate-float-delayed">
+                            <i class="fas fa-bullseye text-[#3A86FF] text-lg"></i> Digital Marketing Specialist
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-6 md:bottom-10 w-full flex justify-center z-30 reveal reveal-delay-3">
+            <a href="#about" class="text-gray-400 hover:text-white transition-colors flex flex-col items-center cursor-pointer">
+                <span class="text-xs uppercase tracking-widest mb-2 font-medium">Scroll Down</span>
+                <i class="fas fa-chevron-down animate-scroll-down text-xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-12 md:py-16 relative">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="text-center mb-10 reveal">
+                <h2 class="text-4xl font-bold mb-4">Who <span class="text-gradient">Am I?</span></h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-12 gap-10 md:gap-12 items-center">
+                <div class="md:col-span-5 reveal pb-8 md:pb-0">
+                    <div class="glass-card p-2 rounded-2xl relative mx-auto w-full max-w-sm">
+                        <img id="about-image" src="" alt="About Me" class="w-full aspect-square rounded-xl object-cover object-top">
+                        <div class="absolute -bottom-6 -right-2 md:-right-6 glass-panel p-5 rounded-xl text-center border border-accent/20 shadow-2xl z-10">
+                            <h3 id="about-experience-years" class="text-4xl font-bold text-gradient mb-1">3+</h3>
+                            <p class="text-sm text-gray-300 font-bold tracking-wide">Years Fixing<br>Ad Accounts</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-7 reveal flex flex-col justify-center mt-8 md:mt-0">
+                    <h3 id="about-title" class="text-2xl font-bold mb-4 text-white"></h3>
+                    <p id="about-text" class="text-gray-400 mb-6 leading-relaxed text-lg text-justify md:text-left"></p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8" id="about-highlights">
+                        <!-- Injected via JS -->
+                    </div>
+                    
+                    <a href="#contact" class="btn-premium w-fit px-8 py-3 rounded-full text-white font-medium inline-flex items-center gap-2">
+                        Get a Free Audit <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-8 relative bg-darker/50">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="text-center mb-8 reveal">
+                <h2 class="text-4xl font-bold mb-4">How I Solve <span class="text-gradient">Problems</span></h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-justify md:text-center">I don't just sell services; I provide solutions that eliminate bottlenecks in your marketing funnel and scale your revenue.</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-8" id="services-grid">
+                <!-- Services injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Tools Section -->
+    <section id="skills" class="py-8 md:py-12 relative">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="text-center mb-10 reveal">
+                <h2 class="text-4xl font-bold mb-4">My <span class="text-gradient">Arsenal</span></h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 md:gap-6 max-w-5xl mx-auto" id="skills-container">
+                <!-- Skills injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio / Case Studies -->
+    <section id="portfolio" class="py-8 relative bg-darker/50">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="text-center mb-8 reveal">
+                <h2 class="text-4xl font-bold mb-4">Proven <span class="text-gradient">Results</span></h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-justify md:text-center">Real businesses, real problems, and the exact strategies I used to solve them and scale their profits.</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-10" id="portfolio-grid">
+                <!-- Portfolio items injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements -->
+    <section id="achievements" class="py-8 relative">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        <div class="container mx-auto px-6 lg:px-12 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8" id="achievements-grid">
+                <!-- Counters injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials (Dual View for PC and Mobile) -->
+    <section id="testimonials" class="py-8 md:py-12 relative bg-darker/50">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="text-center mb-10 reveal">
+                <h2 class="text-4xl font-bold mb-4">Client <span class="text-gradient">Feedback</span></h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+            </div>
+            
+            <!-- Desktop View: Grid of 4 (Hidden on Mobile) -->
+            <div class="hidden md:grid grid-cols-1 lg:grid-cols-2 gap-8 reveal" id="desktop-testimonials-grid">
+                <!-- Injected via JS -->
+            </div>
+
+            <!-- Mobile View: Auto Slider (Hidden on Desktop) -->
+            <div class="block md:hidden relative reveal w-full overflow-hidden" id="mobile-testimonial-slider">
+                <!-- Slider Viewport -->
+                <div class="w-full">
+                    <div class="flex transition-transform duration-500 ease-in-out w-full" id="mobile-testimonials-track">
+                        <!-- Testimonials injected via JS -->
+                    </div>
+                </div>
+                <!-- Navigation Dots -->
+                <div class="flex justify-center gap-3 mt-8" id="mobile-testimonial-dots">
+                    <!-- Dots injected via JS -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-8 md:py-12 relative">
+        <div class="container mx-auto px-6 lg:px-12 max-w-4xl">
+            <div class="text-center mb-10 reveal">
+                <h2 class="text-4xl font-bold mb-4">Common <span class="text-gradient">Problems Fixed</span></h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="space-y-4 reveal" id="faq-container">
+                <!-- FAQs injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Map Section -->
+    <section id="contact" class="py-8 relative bg-darker/50">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="text-center mb-8 reveal">
+                <h2 class="text-4xl font-bold mb-4">Let's Fix Your <span class="text-gradient">Business</span></h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-justify md:text-center">Tell me what's holding your revenue back, and let's build a strategy to overcome it.</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-5 gap-12">
+                <div class="lg:col-span-2 space-y-8 reveal">
+                    <div class="glass-card p-8 rounded-2xl space-y-6" id="contact-info">
+                        <!-- Info injected via JS -->
+                    </div>
+                    
+                    <div class="glass-panel p-2 rounded-2xl h-64 overflow-hidden relative group">
+                        <div id="map-container" class="w-full h-full rounded-xl grayscale hover:grayscale-0 transition-all duration-500">
+                            <!-- Map Iframe injected via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3 reveal reveal-delay-2">
+                    <form id="contact-form" class="glass-card p-8 md:p-10 rounded-2xl">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Your Name *</label>
+                                <input type="text" id="form-name" name="Name" required class="w-full p-4 rounded-xl glass-input placeholder-gray-500" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Email Address *</label>
+                                <input type="email" id="form-email" name="Email" required class="w-full p-4 rounded-xl glass-input placeholder-gray-500" placeholder="john@example.com">
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-300 mb-2">WhatsApp Number *</label>
+                            <input type="tel" id="form-phone" name="WhatsApp" required class="w-full p-4 rounded-xl glass-input placeholder-gray-500" placeholder="e.g. +1 234 567 8900">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Describe Your Problem *</label>
+                            <textarea id="form-message" name="Message" rows="4" required class="w-full p-4 rounded-xl glass-input placeholder-gray-500 resize-none" placeholder="Explain what issues your business is currently facing..."></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn" class="w-full btn-premium py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2">
+                            <span>Send Message</span> <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#080b13] border-t border-white/5 pt-16 pb-8 relative overflow-hidden">
+        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-secondary"></div>
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+                <div>
+                    <a href="#" class="text-2xl font-bold tracking-tighter flex items-center gap-2 mb-6">
+                        <span id="footer-logo-text" class="text-white">Piyal Basak</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 text-justify" id="footer-desc">
+                        I am dedicated to finding the exact bottlenecks holding your business back and implementing data-driven strategies to ensure continuous revenue growth.
+                    </p>
+                    <div class="flex gap-4" id="footer-socials">
+                        <!-- Socials injected via JS -->
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-6">Quick Links</h4>
+                    <ul class="space-y-3" id="footer-links">
+                        <li><a href="#home" class="text-gray-400 hover:text-accent transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-accent transition-colors">About Me</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-accent transition-colors">Solutions</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-accent transition-colors">Case Studies</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-accent transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-6">Contact Info</h4>
+                    <ul class="space-y-4" id="footer-contact-list">
+                        <!-- Contact list injected via JS -->
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">
+                    &copy; <span id="current-year"></span> <span id="copyright-name"></span>. All rights reserved.
+                </p>
+                <a href="#home" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-gray-400 hover:text-white hover:border-accent transition-all">
+                    <i class="fas fa-arrow-up"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
